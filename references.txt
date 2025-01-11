@@ -1,0 +1,5 @@
+WAETHER API KEY = 5667aef69baa4d9bb61224859232710
+
+WEATHER URL = http://api.weatherapi.com/v1/current.json?key=5667aef69baa4d9bb61224859232710&q=Lisbon&aqi=no
+
+FONT AWESOME KIT SCRIPT TAG = <script src="https://kit.fontawesome.com/305a24154e.js" crossorigin="anonymous"></script>
