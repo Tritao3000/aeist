@@ -1,33 +1,54 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { weatherData, weatherDataLondon } from './data';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
+import Information from './information';
+import Details from './details';
 
 function App() {
   const [count, setCount] = useState(0);
+  const [chosenCity, setChosenCity] = useState('');
+
+  const [data, setData] = useState(null);
+
+  const handleChange = (e) => {
+    setChosenCity(e.target.value);
+    console.log(chosenCity);
+  };
+
+  const handleSubmit = (e) => {
+    if (chosenCity === 'London') {
+      setData(weatherDataLondon);
+    } else if (chosenCity === 'Lisbon') {
+      setData(weatherData);
+    } else {
+      alert('City not found');
+    }
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <input
+        type="text"
+        className="bg-gray-200 text-black"
+        value={chosenCity}
+        onChange={handleChange}
+      />
+      <button onClick={handleSubmit}>Submit</button>
+      <div className="max-w-2xl mx-auto my-8 px-4">
+        {data && (
+          <>
+            <section className="mb-6 p-6 bg-white rounded-lg shadow-md">
+              <Information weatherData={data} />
+            </section>
+
+            <section className="p-6 bg-white rounded-lg shadow-md">
+              <Details weatherData={data} />
+            </section>
+          </>
+        )}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   );
 }
